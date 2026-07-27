@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ShiftAlarm — The shift-work alarm that actually goes off</title>
+<meta name="description" content="Built for nurses, factory crews, EMS and everyone whose week doesn't start on Monday. Rotations, drag-and-drop scheduling, backup alarms, snow early-wake, pay tracking. No ads.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B1020;
+    --surface: #111A2E;
+    --surface-high: #1B2740;
+    --outline: #3B4A68;
+    --primary: #8AB4F8;
+    --teal: #2DD4BF;
+    --text: #E5EDFF;
+    --dim: #A9B7D0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(180deg, #0B1020 0%, #111A2E 55%, #1B2740 100%);
+    background-attachment: fixed;
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+  /* Nav */
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+  }
+  .logo { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.02em; }
+  .logo span { color: var(--primary); }
+  .btn {
+    display: inline-block;
+    background: var(--primary);
+    color: #0A1E3C;
+    font-weight: 700;
+    padding: 12px 26px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(138,180,248,.35); }
+  .btn.soon { background: var(--surface-high); color: var(--dim); cursor: default; }
+  .btn.soon:hover { transform: none; box-shadow: none; }
+
+  /* Hero */
+  header.hero { text-align: center; padding: 72px 0 64px; }
+  .pill {
+    display: inline-block;
+    border: 1px solid var(--outline);
+    color: var(--teal);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: .85rem;
+    font-weight: 600;
+    margin-bottom: 26px;
+  }
+  h1 {
+    font-size: clamp(2.3rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.08;
+    margin-bottom: 22px;
+  }
+  h1 em { font-style: normal; color: var(--primary); }
+  .sub {
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    color: var(--dim);
+    max-width: 640px;
+    margin: 0 auto 36px;
+  }
+  .badges { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 30px; }
+  .badge {
+    font-size: .85rem; color: var(--dim);
+    border: 1px solid var(--outline);
+    padding: 7px 15px; border-radius: 999px;
+  }
+  .badge b { color: var(--text); }
+
+  /* Sections */
+  section { padding: 64px 0; }
+  h2 {
+    font-size: clamp(1.7rem, 4vw, 2.4rem);
+    font-weight: 800; letter-spacing: -0.02em;
+    text-align: center; margin-bottom: 14px;
+  }
+  .lead { text-align: center; color: var(--dim); max-width: 620px; margin: 0 auto 48px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 20px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 22px;
+    padding: 28px;
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover { transform: translateY(-4px); border-color: var(--primary); }
+  .card .ic { font-size: 1.7rem; margin-bottom: 14px; display: block; }
+  .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+  .card p { color: var(--dim); font-size: .97rem; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; counter-reset: step; }
+  .step { text-align: center; padding: 20px; }
+  .step::before {
+    counter-increment: step;
+    content: counter(step);
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px;
+    border-radius: 50%;
+    background: var(--surface-high);
+    border: 1px solid var(--outline);
+    color: var(--primary);
+    font-weight: 800; font-size: 1.2rem;
+    margin-bottom: 16px;
+  }
+  .step h3 { font-size: 1.1rem; margin-bottom: 8px; }
+  .step p { color: var(--dim); font-size: .95rem; }
+
+  /* CTA band */
+  .cta {
+    background: linear-gradient(135deg, #1E3A5C, #312E81);
+    border: 1px solid var(--outline);
+    border-radius: 28px;
+    text-align: center;
+    padding: 56px 32px;
+  }
+  .cta h2 { margin-bottom: 12px; }
+  .cta p { color: var(--dim); margin-bottom: 28px; }
+
+  footer {
+    border-top: 1px solid var(--outline);
+    padding: 34px 0 44px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    color: var(--dim); font-size: .9rem;
+  }
+  footer a { color: var(--primary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <nav>
+    <div class="logo">Shift<span>Alarm</span></div>
+    <a class="btn soon" href="#get">Coming soon</a>
+  </nav>
+
+  <header class="hero">
+    <div class="pill">Built for shift workers, by a shift-work household</div>
+    <h1>The shift-work alarm<br>that <em>actually goes off</em>.</h1>
+    <p class="sub">You don't work Monday to Friday — your alarm app shouldn't
+      pretend you do. Rotations, drag-and-drop scheduling, backup alarms,
+      snow early-wake, and pay tracking in one calm app.</p>
+    <a class="btn soon" id="get" href="#notify">Coming soon to Google Play</a>
+    <div class="badges">
+      <div class="badge"><b>No ads</b> ever</div>
+      <div class="badge"><b>No account</b> needed</div>
+      <div class="badge"><b>Under 15 MB</b>, light on battery</div>
+      <div class="badge"><b>Dark mode</b> native</div>
+    </div>
+  </header>
+
+  <section>
+    <h2>Everything a 9-to-5 alarm can't do</h2>
+    <p class="lead">Designed around real roster life — random weeks, night
+      shifts, overtime, and mornings where snooze is not an option.</p>
+    <div class="grid">
+      <div class="card">
+        <span class="ic">📅</span>
+        <h3>A month scheduled in seconds</h3>
+        <p>Drag shift chips onto any day. Copy a good day, paste it anywhere.
+          Paint a whole rotation — 4-on-4-off, DuPont, custom — in two taps.</p>
+      </div>
+      <div class="card">
+        <span class="ic">⏰</span>
+        <h3>Backup alarms & out-the-door</h3>
+        <p>A main alarm, backups after it, and an "out the door!" warning.
+          One sneaky snooze never becomes a missed shift.</p>
+      </div>
+      <div class="card">
+        <span class="ic">❄️</span>
+        <h3>Snow early wake</h3>
+        <p>It checks the forecast before your alarm and wakes you earlier —
+          with a reminder to shovel. Only ever earlier, never later.</p>
+      </div>
+      <div class="card">
+        <span class="ic">💰</span>
+        <h3>Know your pay before payday</h3>
+        <p>Hours per shift type, overtime with <em>your</em> regular hours,
+          unpaid breaks, and PDF reports for payroll.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🔍</span>
+        <h3>Search your schedule</h3>
+        <p>Find any shift by name or time across the whole year, and jump
+          straight to its day. No more scrolling through months.</p>
+      </div>
+      <div class="card">
+        <span class="ic">🌙</span>
+        <h3>Gentle or brutal — your call</h3>
+        <p>A whisper-quiet 5-minute volume ramp for light sleepers, or max
+          volume plus math missions for the deepest sleepers.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Up and running in a minute</h2>
+    <p class="lead">No accounts, no setup wizard marathons.</p>
+    <div class="steps">
+      <div class="step">
+        <h3>Pick your rotation</h3>
+        <p>Or just drag a few shifts onto the calendar — both take seconds.</p>
+      </div>
+      <div class="step">
+        <h3>Set your wake style</h3>
+        <p>Gentle ramp or max volume, backups, and an out-the-door time.</p>
+      </div>
+      <div class="step">
+        <h3>Sleep easy</h3>
+        <p>Your next alarm is always on the calendar, widget, and countdown.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="cta" id="notify">
+      <h2>Be first in line</h2>
+      <p>ShiftAlarm is finishing closed testing now. Want in, or want to know
+        the moment it launches on Google Play?</p>
+      <a class="btn" href="mailto:waterspider.questions@gmail.com?subject=ShiftAlarm%20early%20access">Email me for early access</a>
+    </div>
+  </section>
+
+  <footer>
+    <div>© 2026 ShiftAlarm. Made for the night shift.</div>
+    <div><a href="privacy.html">Privacy policy</a></div>
+  </footer>
+
+</div>
+</body>
+</html>
