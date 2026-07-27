@@ -106,6 +106,43 @@
   .card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
   .card p { color: var(--dim); font-size: .97rem; }
 
+  /* FAQ */
+  .faq { max-width: 760px; margin: 0 auto; }
+  .faq details {
+    background: var(--surface);
+    border: 1px solid var(--outline);
+    border-radius: 16px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .faq summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 18px 22px;
+    font-weight: 600;
+    font-size: 1.02rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    color: var(--primary);
+    font-size: 1.4rem; font-weight: 700;
+    flex-shrink: 0;
+    transition: transform .15s ease;
+  }
+  .faq details[open] summary::after { transform: rotate(45deg); }
+  .faq details[open] { border-color: var(--primary); }
+  .faq .a { padding: 0 22px 20px; color: var(--dim); font-size: .97rem; }
+  .faq .a a { color: var(--primary); }
+  .support { text-align: center; margin-top: 30px; color: var(--dim); }
+  .support a { color: var(--primary); text-decoration: none; font-weight: 600; }
+  .support a:hover { text-decoration: underline; }
+  .faq-sub {
+    max-width: 760px; margin: 44px auto 18px;
+    font-size: 1.15rem; font-weight: 700;
+  }
+
   /* Steps */
   .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; counter-reset: step; }
   .step { text-align: center; padding: 20px; }
@@ -134,6 +171,9 @@
   }
   .cta h2 { margin-bottom: 12px; }
   .cta p { color: var(--dim); margin-bottom: 28px; }
+  .cta-alt { margin-top: 18px !important; margin-bottom: 0 !important; font-size: .92rem; }
+  .cta-mail { color: var(--primary); text-decoration: none; font-weight: 600; user-select: all; }
+  .cta-mail:hover { text-decoration: underline; }
 
   footer {
     border-top: 1px solid var(--outline);
@@ -150,7 +190,7 @@
 
   <nav>
     <div class="logo">Shift<span>Alarm</span></div>
-    <a class="btn soon" href="#get">Coming soon</a>
+    <a class="btn" href="https://forms.gle/dF9PMesbA4W32vfv8" target="_blank" rel="noopener">Get early access</a>
   </nav>
 
   <header class="hero">
@@ -159,7 +199,7 @@
     <p class="sub">You don't work Monday to Friday — your alarm app shouldn't
       pretend you do. Rotations, drag-and-drop scheduling, backup alarms,
       snow early-wake, and pay tracking in one calm app.</p>
-    <a class="btn soon" id="get" href="#notify">Coming soon to Google Play</a>
+    <a class="btn" id="get" href="https://forms.gle/dF9PMesbA4W32vfv8" target="_blank" rel="noopener">Get early access — free</a>
     <div class="badges">
       <div class="badge"><b>No ads</b> ever</div>
       <div class="badge"><b>No account</b> needed</div>
@@ -232,17 +272,102 @@
   </section>
 
   <section>
+    <h2>Questions, answered</h2>
+    <p class="lead">The stuff people actually ask before trusting an app with their paycheck.</p>
+    <div class="faq">
+      <details open>
+        <summary>Will the alarm actually go off?</summary>
+        <div class="a">That's the whole reason ShiftAlarm exists. It books exact alarms with Android's own clock, adds backup alarms after your main one, gives an "out the door" warning, and runs a built-in reliability check that flags any phone setting that could silence your alarm — before it costs you a shift.</div>
+      </details>
+      <details>
+        <summary>Does it work for rotating shifts and nights?</summary>
+        <div class="a">Yes — that's what it's built for. Paint any rotation (4-on-4-off, DuPont, or your own pattern) in two taps, or drag shift chips onto days and copy/paste them around. Your alarms follow your roster, not a Monday-to-Friday repeat.</div>
+      </details>
+      <details>
+        <summary>Is it free? Any ads or subscription?</summary>
+        <div class="a">Free, and no ads — ever. No account either. An optional one-time Pro upgrade is planned for later (never a subscription), and everyone in early access keeps everything they already have.</div>
+      </details>
+      <details>
+        <summary>Does it drain my battery?</summary>
+        <div class="a">No. The whole app is under 15 MB, alarms are handed to the system clock, and there's nothing running in the background watching you. It's built to sit quietly until it's needed.</div>
+      </details>
+      <details>
+        <summary>Does it work offline?</summary>
+        <div class="a">Yes. Your schedule, alarms, and pay data live on your phone and work with no connection at all. The only feature that briefly needs internet is the snow early-wake forecast check.</div>
+      </details>
+      <details>
+        <summary>What is snow early wake?</summary>
+        <div class="a">Before your alarm, ShiftAlarm checks the forecast. If heavy snow is coming, it wakes you earlier by the custom buffer you choose — with a reminder to shovel. It only ever wakes you earlier, never later.</div>
+      </details>
+      <details>
+        <summary>Can it track my pay and overtime?</summary>
+        <div class="a">Yes. Set your own regular hours (not everyone is 40 a week), unpaid breaks, and per-shift rates — then export a clean PDF report for payroll. Know your paycheck before payday.</div>
+      </details>
+      <details>
+        <summary>Is my data private?</summary>
+        <div class="a">Everything stays on your device. No account, no cloud sync of your roster, nothing sold. Read the full <a href="privacy.html">privacy policy</a> — it's short, because there's nothing to hide.</div>
+      </details>
+      <details>
+        <summary>Is there an iPhone version?</summary>
+        <div class="a">Not yet — ShiftAlarm is Android-first, because that's where alarm reliability needed fixing most. iPhone is on the roadmap after launch.</div>
+      </details>
+      <details>
+        <summary>How do I become a tester?</summary>
+        <div class="a">Fill in the 30-second <a href="https://forms.gle/dF9PMesbA4W32vfv8" target="_blank" rel="noopener">early access form</a> and you'll get your invite as soon as a testing slot opens.</div>
+      </details>
+    </div>
+
+    <h3 class="faq-sub">Help &amp; quick fixes</h3>
+    <div class="faq">
+      <details>
+        <summary>My phone won't let me allow "Display over other apps"</summary>
+        <div class="a">This happens on newer Android versions when an app is installed directly (sideloaded) instead of from Google Play. Fix: go to <b>Settings → Apps → ShiftAlarm</b>, tap the <b>⋮ menu</b> (top right), choose <b>"Allow restricted settings"</b>, then enable <b>Display over other apps</b>. Once ShiftAlarm is installed from Google Play, this block doesn't apply at all.</div>
+      </details>
+      <details>
+        <summary>My alarm didn't ring — what do I check?</summary>
+        <div class="a">Open ShiftAlarm and run the built-in <b>reliability check</b> — it flags exactly which phone setting is in the way. The most common culprit is battery saving: go to <b>Settings → Apps → ShiftAlarm → Battery</b> and set it to <b>Unrestricted</b> so the system can't delay your alarm.</div>
+      </details>
+      <details>
+        <summary>How do I set up my rotation?</summary>
+        <div class="a">On the calendar, pick your pattern (4-on-4-off, DuPont, or build a custom one) and paint it in two taps. Or just drag shift chips onto the days you work — no rotation needed.</div>
+      </details>
+      <details>
+        <summary>How do I change or remove a shift?</summary>
+        <div class="a">Tap any day to edit it. To clear a day, drag the erase chip onto it (or drag the day to the erase zone). Deleting a day also clears its repeating alarms.</div>
+      </details>
+      <details>
+        <summary>The alarm starts too loud (or too quiet)</summary>
+        <div class="a">In alarm settings, choose your wake style. Gentle mode fades in slowly — the volume ramps up over a full 5 minutes, not 30 seconds. Heavy sleepers can pick max volume with math missions instead.</div>
+      </details>
+      <details>
+        <summary>How do I move everything to a new phone?</summary>
+        <div class="a">Use <b>Backup &amp; Restore</b>: export a backup file on your old phone, copy it to the new one, and import. Your whole schedule, shift templates, and settings come across.</div>
+      </details>
+      <details>
+        <summary>How do I print or share my schedule?</summary>
+        <div class="a">Open the menu and choose <b>Print schedule</b> to get a clean PDF you can print, text to family, or hand to your boss. You can also sync to Google Calendar or export a calendar file.</div>
+      </details>
+      <details>
+        <summary>Something's broken — how do I report it?</summary>
+        <div class="a">Email <a href="mailto:waterspider.questions@gmail.com">waterspider.questions@gmail.com</a> with what happened and your phone model. Bugs from early testers get fixed first — that's the deal.</div>
+      </details>
+    </div>
+    <p class="support">Still stuck? Email <a href="mailto:waterspider.questions@gmail.com">waterspider.questions@gmail.com</a> — a human reads every message.</p>
+  </section>
+
+  <section>
     <div class="cta" id="notify">
       <h2>Be first in line</h2>
       <p>ShiftAlarm is finishing closed testing now. Want in, or want to know
         the moment it launches on Google Play?</p>
-      <a class="btn" href="mailto:waterspider.questions@gmail.com?subject=ShiftAlarm%20early%20access">Email me for early access</a>
+      <a class="btn" href="https://forms.gle/dF9PMesbA4W32vfv8" target="_blank" rel="noopener">Get early access — 30 seconds</a>
+      <p class="cta-alt">One quick Google Form. No account, no spam — just your invite.</p>
     </div>
   </section>
 
   <footer>
     <div>© 2026 ShiftAlarm. Made for the night shift.</div>
-    <div><a href="privacy.html">Privacy policy</a></div>
+    <div><a href="mailto:waterspider.questions@gmail.com">Contact</a> &nbsp;·&nbsp; <a href="privacy.html">Privacy policy</a></div>
   </footer>
 
 </div>
